@@ -1,0 +1,20 @@
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int Psum[] = new int[n];
+        int Ssum[] = new int[n];
+        Psum[0] = height[0];
+        for(int i = 1 ;  i < n ; i++){
+            Psum[i] = Math.max(Psum[i-1] , height[i]);
+        }
+        Ssum[n-1] = height[n-1];
+        for(int j = n-2 ; j >= 0; j--){
+            Ssum[j] = Math.max(Ssum[j+1] , height[j]);
+       }
+       int trap = 0;
+       for(int z = 0 ; z < n ; z++){
+            trap += Math.min(Psum[z],Ssum[z]) - height[z];
+       }
+       return trap ;
+    }
+}
